@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c82b8b5f0a349dba4bc626da1cac76, type: 3}
+  m_Name: TestParameters
+  m_EditorClassIdentifier: 
+  dungeon:
+    tree: {fileID: 11400000, guid: 9cda685678d5143b6997b557f0ba7d9d, type: 2}
+    bounds:
+      m_Position: {x: 0, y: 0, z: 0}
+      m_Size: {x: 700, y: 700, z: 0}
+    IsFilledWithTerrain: 0
+    filledOffset: 10
+  room:
+    isStartingRandomlyEachIteration: 0
+    isRandomWalking: 1
+    minIterations: 10
+    maxIterations: 100
+    minWalkLength: 50
+    maxWalkLength: 300
+    minWidth: 50
+    minHeight: 50
+    number: 10
+    offset: 2
+  corridor:
+    minWidth: 3
+    maxWidth: 5
+  vent:
+    minDistWidth: 1
+    maxDistWidth: 3
+    minDistHeight: 1
+    maxDistHeight: 3
+  platform:
+    minDistWidth: 2
+    maxDistWidth: 7
+    minDistHeight: 4
+    maxDistHeight: 7
+    minRandomWalk: 2
+    maxRandomWalk: 10
+  minSpace: 3
+  minimumSpaceWorker: 2

@@ -1,0 +1,20 @@
+{
+    "name": "Dungeon",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c7e4fd71ec2324176bff0c55e7479114",
+        "GUID:613783dc1674e844b87788ea74ede0f6",
+        "GUID:cbdf09464b6b87745be748a67e5a21a0",
+        "GUID:299beb10465c46f41abeaf10478b4727",
+        "GUID:72880d7cef33049feafae4fff8e57f12"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

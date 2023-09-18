@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Terrain
+  - Water
+  - UI
+  - Player
+  - Enemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BackPlane
+    uniqueID: 2631881577
+    locked: 0
+  - name: BackArt
+    uniqueID: 2250677703
+    locked: 0
+  - name: BackTiles
+    uniqueID: 1960112545
+    locked: 0
+  - name: BackProps
+    uniqueID: 1634075487
+    locked: 0
+  - name: Player
+    uniqueID: 4084271219
+    locked: 0
+  - name: FrontProps
+    uniqueID: 2369051457
+    locked: 0

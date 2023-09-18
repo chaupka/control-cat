@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f79be9a25d43409e801a49edfaa78bb, type: 3}
+  m_Name: DungeonTreeSettings
+  m_EditorClassIdentifier: 
+  dungeonTreeXml: {fileID: 9197481963319205126, guid: 6a32b38eef8b04a15a1223975dfc92bd, type: 3}
+  dungeonTreeStyle: {fileID: 7433441132597879392, guid: 31a16addfbe004e63889fdd347d69049, type: 3}
+  nodeXml: {fileID: 9197481963319205126, guid: 2c6915193c74d4780baae9c8a03ba280, type: 3}
+  scriptTemplateRoomNode: {fileID: 4900000, guid: 75e98e3c3f44e4ba18ad05b7b494d00b, type: 3}
+  scriptTemplateConnectionNode: {fileID: 4900000, guid: aa0eb443c82ff45108573a92f1198890, type: 3}
+  newNodeBasePath: Assets/

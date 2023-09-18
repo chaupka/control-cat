@@ -1,0 +1,266 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7899598343877210290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2976891e7a02742b694d378a43cc4175, type: 3}
+  m_Name: EndRoom
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: f44c59180fa544b329af0c1ba6d08cf8
+  position: {x: 684.00006, y: 840.77496}
+  description: 
+  children: []
+  bounds:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
+--- !u!114 &-3813840933756787877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c84bdb863944309b9099106155d25c, type: 3}
+  m_Name: TrapRoom
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: 66d4bc26abc7c435aa505a7b69b734d4
+  position: {x: 339, y: 545.5175}
+  description: 
+  children:
+  - {fileID: 2006336470877751426}
+  bounds:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
+  trap: 0
+--- !u!114 &-3357571277421508093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74598b5d6acf44dcf9e90a252ac58349, type: 3}
+  m_Name: CorridorNode
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: f3d2436ce477c478f8ccdcc903a5aaa8
+  position: {x: 104.840004, y: 275}
+  description: 
+  child: {fileID: 7786593197895024498}
+  tilePositions: []
+--- !u!114 &-2666013677829564751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387a191c811a94a88907e03d290e492c, type: 3}
+  m_Name: KeyRoom
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: 712cc9657e60742e483aa338e841ec00
+  position: {x: 339, y: 825.92993}
+  description: 
+  children:
+  - {fileID: -3357571277421508093}
+  bounds:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
+  key: 0
+--- !u!114 &-1644018137476654844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fbac94bbb2c479397f135ee94dc0e8, type: 3}
+  m_Name: LockRoom
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: 49e34767513d8480d8ccddf590e75476
+  position: {x: 684, y: 523.99994}
+  description: 
+  children:
+  - {fileID: 6733372373772689908}
+  bounds:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
+  keyLock: 0
+--- !u!114 &-604428100085427458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f23d9763257c410780e6fe27f25ce03, type: 3}
+  m_Name: StartRoom
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: c103f3dafd0804451937eec748ae0d07
+  position: {x: 468, y: -17.637829}
+  description: 
+  children:
+  - {fileID: 5783921980770960764}
+  bounds:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bf4f92a65a6148edb3cdf8d2e4958ff, type: 3}
+  m_Name: TestDungeonTree
+  m_EditorClassIdentifier: 
+  startRoom: {fileID: -604428100085427458}
+  nodes:
+  - {fileID: -604428100085427458}
+  - {fileID: -7899598343877210290}
+  - {fileID: 5783921980770960764}
+  - {fileID: 7786593197895024498}
+  - {fileID: 7865402386031537804}
+  - {fileID: -1644018137476654844}
+  - {fileID: 6733372373772689908}
+  - {fileID: 1253024309582389981}
+  - {fileID: -3813840933756787877}
+  - {fileID: -2666013677829564751}
+  - {fileID: 2006336470877751426}
+  - {fileID: -3357571277421508093}
+--- !u!114 &1253024309582389981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74598b5d6acf44dcf9e90a252ac58349, type: 3}
+  m_Name: CorridorNode
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: 65819a0209b2c413f9b3a5e7c12a8336
+  position: {x: 338.7775, y: 409.55}
+  description: 
+  child: {fileID: -3813840933756787877}
+  tilePositions: []
+--- !u!114 &2006336470877751426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74598b5d6acf44dcf9e90a252ac58349, type: 3}
+  m_Name: CorridorNode
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: 8b224ad1e3e2f47e68475ba3a6f607b6
+  position: {x: 339, y: 687}
+  description: 
+  child: {fileID: -2666013677829564751}
+  tilePositions: []
+--- !u!114 &5783921980770960764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74598b5d6acf44dcf9e90a252ac58349, type: 3}
+  m_Name: CorridorNode
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: c7119a7fe611f44d0a286c79eb4ae717
+  position: {x: 467.99997, y: 130.64017}
+  description: 
+  child: {fileID: 7786593197895024498}
+  tilePositions: []
+--- !u!114 &6733372373772689908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74598b5d6acf44dcf9e90a252ac58349, type: 3}
+  m_Name: CorridorNode
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: bad482e385f124beb833f7f55bfbee33
+  position: {x: 684.00006, y: 687}
+  description: 
+  child: {fileID: -7899598343877210290}
+  tilePositions: []
+--- !u!114 &7786593197895024498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da606dc95f334bad865f9aa1d410293, type: 3}
+  m_Name: LoreRoom
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: 92c49e759c35d456ca1ba7aa15cb91ac
+  position: {x: 467.99997, y: 275.2863}
+  description: 
+  children:
+  - {fileID: 1253024309582389981}
+  - {fileID: 7865402386031537804}
+  bounds:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
+  lore: 0
+--- !u!114 &7865402386031537804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74598b5d6acf44dcf9e90a252ac58349, type: 3}
+  m_Name: CorridorNode
+  m_EditorClassIdentifier: 
+  started: 0
+  guid: 6e559088293b943439b62fd5f63994ec
+  position: {x: 684.00006, y: 392}
+  description: 
+  child: {fileID: -1644018137476654844}
+  tilePositions: []
