@@ -30,7 +30,7 @@ namespace DungeonGeneration
         {
             dungeonGenerator.GenerateDungeon(this);
             yield return new WaitUntil(() => dungeonGenerator.isDone);
-            StartCoroutine(navMeshController.FixNavMeshAgent());
+            StartCoroutine(navMeshController.BakeNavMesh());
             yield return new WaitUntil(() => navMeshController.isDone);
             rooms = dungeonGenerator.tree.nodes.OfType<RoomNode>().ToHashSet();
             var startRoom = rooms.FirstOrDefault(r => r is StartRoom).bounds;
@@ -90,11 +90,11 @@ namespace DungeonGeneration
             {
                 dungeonGenerator.ClearPlatform(platforms.Dequeue());
             }
-            StartCoroutine(navMeshController.FixNavMeshAgent());
             if (platformCounter % maxPlatforms == 0)
             {
                 StartCoroutine(CopyCat());
             }
+            navMeshController.Rebake();
         }
 
         private IEnumerator CopyCat()

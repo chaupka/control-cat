@@ -57,17 +57,19 @@ namespace DungeonGeneration
             backGround.ExceptWith(ventPlatformPositions);
             // var platforms = TerrainGenerator.CreatePlatforms(backGround, walls, parameters, r);
 
-            var terrain = new HashSet<Vector2Int>(walls);
-            terrain.UnionWith(ventPlatformPositions);
+            originalTerrain = new HashSet<Vector2Int>(walls);
+            originalTerrain.UnionWith(ventPlatformPositions);
             if (parameters.dungeon.IsFilledWithTerrain)
             {
-                var notToBeFilled = new HashSet<Vector2Int>(terrain);
+                var notToBeFilled = new HashSet<Vector2Int>(originalTerrain);
                 notToBeFilled.UnionWith(backGround);
                 notToBeFilled.UnionWith(ventPositions);
                 notToBeFilled.UnionWith(ventPlatformPositions);
-                terrain.UnionWith(TerrainGenerator.CreateRestOfDungeon(notToBeFilled, parameters));
+                originalTerrain.UnionWith(
+                    TerrainGenerator.CreateRestOfDungeon(notToBeFilled, parameters)
+                );
             }
-            PaintMaps(terrain, backGround, ventPositions);
+            PaintMaps(originalTerrain, backGround, ventPositions);
         }
 
         private bool TryConnectRoomsByDungeonTree(List<BoundsInt> roomBounds)

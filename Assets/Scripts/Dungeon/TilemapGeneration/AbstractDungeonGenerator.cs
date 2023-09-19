@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
@@ -14,6 +15,7 @@ namespace DungeonGeneration
         public int seed = 0;
         protected DungeonStateController dungeonStateController;
         public DungeonTree tree;
+        public HashSet<Vector2Int> originalTerrain;
         public bool isDone;
 
         public void GenerateDungeon(DungeonStateController dungeonStateController)
@@ -40,8 +42,9 @@ namespace DungeonGeneration
             tilemapVisualizer.ClearBackTiles(platform);
         }
 
-        public void ClearPlatform(IEnumerable<Vector2Int> platform)
+        public void ClearPlatform(HashSet<Vector2Int> platform)
         {
+            platform.ExceptWith(originalTerrain);
             tilemapVisualizer.PaintBackTiles(platform);
             tilemapVisualizer.ClearTerrainTiles(platform);
         }

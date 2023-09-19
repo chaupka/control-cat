@@ -188,6 +188,18 @@ public class PlayerMovement : MonoBehaviour
         contactFilter2D.SetLayerMask(LayerTag.terrainLayer);
         contactFilter2D.useLayerMask = true;
         dungeonState = GameObject.Find("DungeonState").GetComponent<DungeonStateController>();
+        StartCoroutine(CheckIsInRoom());
+    }
+
+    private IEnumerator CheckIsInRoom()
+    {
+        while (1 < 2)
+        {
+            yield return new WaitForSeconds(3);
+            dungeonState.playerRoom = dungeonState.rooms.FirstOrDefault(
+                r => r.tilePositions.Contains(Vector2Int.RoundToInt(transform.position))
+            );
+        }
     }
 
     #region update
