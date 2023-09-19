@@ -37,18 +37,22 @@ namespace DungeonGeneration
 
             var walls = TerrainGenerator.CreateWalls(backGround);
             VentGenerator.Create(rooms, vents, parameters, r);
-            var ventPositions = vents.SelectMany(v =>
-            {
-                var positions = new HashSet<Vector2Int>(v.parentVentPositions);
-                positions.UnionWith(v.childVentPositions);
-                return positions;
-            });
-            var ventPlatformPositions = vents.SelectMany(v =>
-            {
-                var positions = new HashSet<Vector2Int>(v.parentPlatformPositions);
-                positions.UnionWith(v.childPlatformPositions);
-                return positions;
-            });
+            var ventPositions = vents
+                .SelectMany(v =>
+                {
+                    var positions = new HashSet<Vector2Int>(v.parentVentPositions);
+                    positions.UnionWith(v.childVentPositions);
+                    return positions;
+                })
+                .ToHashSet();
+            var ventPlatformPositions = vents
+                .SelectMany(v =>
+                {
+                    var positions = new HashSet<Vector2Int>(v.parentPlatformPositions);
+                    positions.UnionWith(v.childPlatformPositions);
+                    return positions;
+                })
+                .ToHashSet();
             backGround.ExceptWith(ventPositions);
             backGround.ExceptWith(ventPlatformPositions);
             // var platforms = TerrainGenerator.CreatePlatforms(backGround, walls, parameters, r);
@@ -63,7 +67,7 @@ namespace DungeonGeneration
                 notToBeFilled.UnionWith(ventPlatformPositions);
                 terrain.UnionWith(TerrainGenerator.CreateRestOfDungeon(notToBeFilled, parameters));
             }
-            PaintMaps(terrain, backGround);
+            PaintMaps(terrain, backGround, ventPositions);
         }
 
         private bool TryConnectRoomsByDungeonTree(List<BoundsInt> roomBounds)
@@ -275,23 +279,15 @@ namespace DungeonGeneration
             return corridor.Select(c => c.Key).ToList();
         }
 
-        private void PaintMaps(HashSet<Vector2Int> terrain, HashSet<Vector2Int> background)
+        private void PaintMaps(
+            HashSet<Vector2Int> terrain,
+            HashSet<Vector2Int> background,
+            HashSet<Vector2Int> vents
+        )
         {
-            PaintTerrain(terrain);
-            PaintBackground(background);
-        }
-
-        private void PaintTerrain(HashSet<Vector2Int> terrain)
-        {
-            foreach (var position in terrain)
-            {
-                tilemapVisualizer.PaintSingleTerrain(position);
-            }
-        }
-
-        private void PaintBackground(HashSet<Vector2Int> backPositions)
-        {
-            tilemapVisualizer.PaintBackTiles(backPositions);
+            tilemapVisualizer.PaintTerrainTiles(terrain);
+            tilemapVisualizer.PaintVentTiles(vents);
+            tilemapVisualizer.PaintBackTiles(background);
         }
     }
 }
