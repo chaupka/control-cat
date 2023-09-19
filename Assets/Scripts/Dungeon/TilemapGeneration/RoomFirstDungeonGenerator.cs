@@ -40,21 +40,27 @@ namespace DungeonGeneration
             var ventPositions = vents.SelectMany(v =>
             {
                 var positions = new HashSet<Vector2Int>(v.parentVentPositions);
-                positions.UnionWith(v.parentPlatformPositions);
                 positions.UnionWith(v.childVentPositions);
+                return positions;
+            });
+            var ventPlatformPositions = vents.SelectMany(v =>
+            {
+                var positions = new HashSet<Vector2Int>(v.parentPlatformPositions);
                 positions.UnionWith(v.childPlatformPositions);
                 return positions;
             });
             backGround.ExceptWith(ventPositions);
-            var platforms = TerrainGenerator.CreatePlatforms(backGround, walls, parameters, r);
+            backGround.ExceptWith(ventPlatformPositions);
+            // var platforms = TerrainGenerator.CreatePlatforms(backGround, walls, parameters, r);
 
             var terrain = new HashSet<Vector2Int>(walls);
-            terrain.UnionWith(platforms);
+            terrain.UnionWith(ventPlatformPositions);
             if (parameters.dungeon.IsFilledWithTerrain)
             {
                 var notToBeFilled = new HashSet<Vector2Int>(terrain);
                 notToBeFilled.UnionWith(backGround);
                 notToBeFilled.UnionWith(ventPositions);
+                notToBeFilled.UnionWith(ventPlatformPositions);
                 terrain.UnionWith(TerrainGenerator.CreateRestOfDungeon(notToBeFilled, parameters));
             }
             PaintMaps(terrain, backGround);
@@ -101,7 +107,7 @@ namespace DungeonGeneration
                     var newConnections = new List<ConnectionNode>();
                     foreach (var c in connections)
                     {
-                        var childRoom = (RoomNode)c.child;
+                        var childRoom = c.child;
                         childRoom.bounds =
                             childRoom.bounds == default
                                 ? FindClosestPointTo(parentRoom.bounds, remainingRoomBounds)

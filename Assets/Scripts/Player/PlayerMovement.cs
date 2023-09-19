@@ -15,9 +15,6 @@ public struct PlatformingExtras
     [HideInInspector]
     public bool isJumpBuffering;
     public float jumpBufferCast;
-
-    // public bool hasStickyFeet;
-    // public bool hasSpeedApex;
     public bool hasCoyoteTime;
     public float maxCoyoteTime;
 

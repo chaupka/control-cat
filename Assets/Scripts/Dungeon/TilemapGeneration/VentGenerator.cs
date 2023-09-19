@@ -53,13 +53,16 @@ namespace DungeonGeneration
                     foundPositions = true;
                 }
             }
-            var vent = new HashSet<Vector2Int>();
-            for (var i = Direction2D.cardinalDirectionsList.Count - 1; i >= 0; i--)
+            var vent = new HashSet<Vector2Int>
             {
-                vent.Add(startPosition + Direction2D.cardinalDirectionsList[i]);
-            }
+                startPosition,
+                startPosition + Vector2Int.left,
+                startPosition + Vector2Int.up,
+                startPosition + new Vector2Int(-1, 1)
+            };
             var platform = positions.Select(p => startPosition + p).ToHashSet();
             platform.ExceptWith(vent);
+            platform.RemoveWhere(p => vent.Any(v => p.x.Equals(v.x) && p.y > v.y));
 
             return new(vent, platform);
         }
