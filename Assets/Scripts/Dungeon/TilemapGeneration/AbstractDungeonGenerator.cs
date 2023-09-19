@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
@@ -32,5 +33,17 @@ namespace DungeonGeneration
         }
 
         protected abstract void RunProceduralGeneration();
+
+        public void CreatePlatform(IEnumerable<Vector2Int> platform)
+        {
+            tilemapVisualizer.PaintTerrainTiles(platform);
+            tilemapVisualizer.ClearBackTiles(platform);
+        }
+
+        public void ClearPlatform(IEnumerable<Vector2Int> platform)
+        {
+            tilemapVisualizer.PaintBackTiles(platform);
+            tilemapVisualizer.ClearTerrainTiles(platform);
+        }
     }
 }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Linq;
+using DungeonGeneration;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -104,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
     bool IsBumpingHead => !IsGrounded && !IsFalling && CheckIsBumpingHead();
     Vector2 leftHeadBumpEdge;
     Vector2 rightHeadBumpEdge;
+    private DungeonStateController dungeonState;
 
     [SerializeField]
     PlatformingExtras platforming;
@@ -184,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
         contactFilter2D.useNormalAngle = true;
         contactFilter2D.SetLayerMask(LayerTag.terrainLayer);
         contactFilter2D.useLayerMask = true;
+        dungeonState = GameObject.Find("DungeonState").GetComponent<DungeonStateController>();
     }
 
     #region update
@@ -399,6 +403,19 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+    }
+
+    public void OnInteractPerformed()
+    {
+        // check if any gameobject exists
+
+        // check if is on specific position in tilemap
+        dungeonState.Interact(transform);
+    }
+
+    public void OnCopyPerformed()
+    {
+        dungeonState.CopyPlatform(Vector2Int.RoundToInt(transform.position));
     }
     #endregion
 

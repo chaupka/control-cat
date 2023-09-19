@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,6 +29,8 @@ public class InputController : MonoBehaviour
         playerInput.Player.Look.performed += OnLookPerformed;
         playerInput.Player.Look.canceled += OnLookCancelled;
         playerInput.Player.Dash.performed += OnDashPerformed;
+        playerInput.Player.Interact.performed += OnInteractPerformed;
+        playerInput.Player.Copy.performed += OnCopyPerformed;
     }
 
     private void OnDisable()
@@ -40,6 +43,8 @@ public class InputController : MonoBehaviour
         playerInput.Player.Look.performed -= OnLookPerformed;
         playerInput.Player.Look.canceled -= OnLookCancelled;
         playerInput.Player.Dash.performed -= OnDashPerformed;
+        playerInput.Player.Interact.performed -= OnInteractPerformed;
+        playerInput.Player.Copy.performed -= OnCopyPerformed;
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context)
@@ -75,5 +80,15 @@ public class InputController : MonoBehaviour
     private void OnDashPerformed(InputAction.CallbackContext context)
     {
         playerMovement.OnDashStarted();
+    }
+
+    private void OnInteractPerformed(InputAction.CallbackContext context)
+    {
+        playerMovement.OnInteractPerformed();
+    }
+
+    private void OnCopyPerformed(InputAction.CallbackContext context)
+    {
+        playerMovement.OnCopyPerformed();
     }
 }

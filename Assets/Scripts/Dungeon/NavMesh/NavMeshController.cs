@@ -6,13 +6,30 @@ using UnityEngine.Tilemaps;
 
 public class NavMeshController : MonoBehaviour
 {
-    [SerializeField] Tilemap backTilemap;
-    [HideInInspector] public bool isDone;
+    [SerializeField]
+    Tilemap backTilemap;
+    private NavMeshSurface surface;
+
+    [HideInInspector]
+    public bool isDone;
+
+    private void Start()
+    {
+        surface = GetComponent<NavMeshSurface>();
+    }
 
     public IEnumerator FixNavMeshAgent()
     {
-        GetComponent<NavMeshSurface>().BuildNavMeshAsync();
-        while (!NavMesh.SamplePosition(backTilemap.cellBounds.center, out _, backTilemap.size.magnitude, NavMesh.AllAreas))
+        isDone = false;
+        surface.BuildNavMesh();
+        while (
+            !NavMesh.SamplePosition(
+                backTilemap.cellBounds.center,
+                out _,
+                backTilemap.size.magnitude,
+                NavMesh.AllAreas
+            )
+        )
         {
             yield return null;
         }

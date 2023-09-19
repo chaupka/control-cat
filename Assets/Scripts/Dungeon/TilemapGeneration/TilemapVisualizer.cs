@@ -20,9 +20,19 @@ namespace DungeonGeneration
             PaintTiles(terrainPositions, terrainTilemap, terrainTile);
         }
 
+        public void ClearTerrainTiles(IEnumerable<Vector2Int> positions)
+        {
+            PaintTiles(positions, terrainTilemap, null);
+        }
+
         public void PaintBackTiles(IEnumerable<Vector2Int> backPositions)
         {
             PaintTiles(backPositions, backgroundTilemap, backgroundTile);
+        }
+
+        public void ClearBackTiles(IEnumerable<Vector2Int> positions)
+        {
+            PaintTiles(positions, backgroundTilemap, null);
         }
 
         public void PaintVentTiles(IEnumerable<Vector2Int> ventPositions)

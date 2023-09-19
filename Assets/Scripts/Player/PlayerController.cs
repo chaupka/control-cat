@@ -8,8 +8,11 @@ public class PlayerController : MonoBehaviour
 {
     //moving
     // Vector2[] lookAround = {Vector2.up, Vector2.right, Vector2.down, Vector2.left};
-    [HideInInspector] public PlayerMovement playerMovement;
-    [HideInInspector] public Vector2 lookDirection = new Vector2(0, -1);
+    [HideInInspector]
+    public PlayerMovement playerMovement;
+
+    [HideInInspector]
+    public Vector2 lookDirection = new Vector2(0, -1);
 
     Animator animator;
 
@@ -38,5 +41,4 @@ public class PlayerController : MonoBehaviour
         // animator.SetFloat("Look Y", lookDirection.y);
         // animator.SetFloat("Speed", move.magnitude);
     }
-
 }
