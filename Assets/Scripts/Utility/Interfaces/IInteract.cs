@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IInteract
+namespace Utility
 {
-    public void Interact(Transform transform);
+    public interface IInteract
+    {
+        public void Interact(Transform transform);
+    }
 }

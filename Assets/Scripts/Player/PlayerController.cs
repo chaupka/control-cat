@@ -41,4 +41,12 @@ public class PlayerController : MonoBehaviour
         // animator.SetFloat("Look Y", lookDirection.y);
         // animator.SetFloat("Speed", move.magnitude);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.Equals(GameStateController.instance.cheese))
+        {
+            GameStateController.instance.WinGame();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TheKiwiCoder;
+using Utility;
 
 public class CheckIfPlayerIsInFov : DecoratorNode
 {

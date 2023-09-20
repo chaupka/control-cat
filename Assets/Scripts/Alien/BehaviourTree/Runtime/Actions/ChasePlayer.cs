@@ -14,9 +14,7 @@ public class ChasePlayer : ActionNode
         context.agent.acceleration = acceleration;
     }
 
-    protected override void OnStop()
-    {
-    }
+    protected override void OnStop() { }
 
     protected override State OnUpdate()
     {
@@ -29,6 +27,7 @@ public class ChasePlayer : ActionNode
 
         if (blackboard.isChasing && context.agent.remainingDistance < tolerance)
         {
+            GameStateController.instance.LoseGame();
             return State.Success;
         }
 

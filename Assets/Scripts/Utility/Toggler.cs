@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Toggler : MonoBehaviour
+namespace Utility
 {
-    MonoBehaviour controller;
-
-    // Start is called before the first frame update
-    protected void Start()
+    public class Toggler : MonoBehaviour
     {
-        var behaviours = transform.parent.GetComponents<MonoBehaviour>();
-        controller = behaviours.FirstOrDefault(b => b.GetType().Name.Equals(name[..^7]));
-    }
+        MonoBehaviour controller;
 
-    public void ToggleController(bool enabled)
-    {
-        controller.enabled = enabled;
+        // Start is called before the first frame update
+        protected void Start()
+        {
+            var behaviours = transform.parent.GetComponents<MonoBehaviour>();
+            controller = behaviours.FirstOrDefault(b => b.GetType().Name.Equals(name[..^7]));
+        }
+
+        public void ToggleController(bool enabled)
+        {
+            controller.enabled = enabled;
+        }
     }
 }

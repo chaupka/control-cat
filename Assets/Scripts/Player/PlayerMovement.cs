@@ -4,6 +4,7 @@ using System.Linq;
 using DungeonGeneration;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Utility;
 
 [Serializable]
 public struct PlatformingExtras
@@ -423,6 +424,7 @@ public class PlayerMovement : MonoBehaviour
 
         // check if is on specific position in tilemap
         dungeonState.Interact(transform);
+        rb.velocity = Vector2.zero;
     }
 
     public void OnCopyPerformed()

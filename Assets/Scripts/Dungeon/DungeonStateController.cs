@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using Utility;
 
 namespace DungeonGeneration
 {
@@ -33,6 +34,14 @@ namespace DungeonGeneration
             StartCoroutine(navMeshController.BakeNavMesh());
             yield return new WaitUntil(() => navMeshController.isDone);
             rooms = dungeonGenerator.tree.nodes.OfType<RoomNode>().ToHashSet();
+            var endRoom = rooms.FirstOrDefault(r => r is EndRoom).bounds;
+            NavMesh.SamplePosition(
+                endRoom.center,
+                out NavMeshHit cheeseHit,
+                endRoom.size.magnitude,
+                NavMesh.AllAreas
+            );
+            GameStateController.instance.SpawnCheese(cheeseHit.position);
             var startRoom = rooms.FirstOrDefault(r => r is StartRoom).bounds;
 
             NavMesh.SamplePosition(

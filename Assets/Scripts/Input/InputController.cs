@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility;
 
 public class InputController : MonoBehaviour
 {
@@ -31,6 +31,7 @@ public class InputController : MonoBehaviour
         playerInput.Player.Dash.performed += OnDashPerformed;
         playerInput.Player.Interact.performed += OnInteractPerformed;
         playerInput.Player.Copy.performed += OnCopyPerformed;
+        playerInput.Player.Pause.performed += OnPausePerformed;
     }
 
     private void OnDisable()
@@ -45,6 +46,12 @@ public class InputController : MonoBehaviour
         playerInput.Player.Dash.performed -= OnDashPerformed;
         playerInput.Player.Interact.performed -= OnInteractPerformed;
         playerInput.Player.Copy.performed -= OnCopyPerformed;
+        playerInput.Player.Pause.performed -= OnPausePerformed;
+    }
+
+    private void OnPausePerformed(InputAction.CallbackContext context)
+    {
+        GameStateController.instance.TogglePauseGame();
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context)
