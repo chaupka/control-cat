@@ -10,11 +10,11 @@ public class PauseMenu : MenuController
         base.HandleClick();
         if (isContinue)
         {
-            GameStateController.instance.TogglePauseGame();
+            GameStateController.instance.TogglePauseMenu();
         }
         else if (isBackToMainMenu)
         {
-            GameStateController.instance.TogglePauseGame();
+            GameStateController.instance.TogglePauseMenu();
             QuitToMainMenu();
         }
     }

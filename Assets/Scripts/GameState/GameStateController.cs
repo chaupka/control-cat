@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using Utility;
 using Scene = Utility.Scene;
+using System.Linq;
 
 public enum IsEnabled
 {
@@ -41,6 +43,7 @@ public class GameStateController : MonoBehaviour
     // public int hasDiedInTheEnd;
     public bool isPaused;
     GameObject pauseMenu;
+    GameObject gameOverBox;
 
     // public AudioSource currentDungeonMusic;
     // public AudioSource currentBossMusic;
@@ -86,6 +89,7 @@ public class GameStateController : MonoBehaviour
             || instance.cameraController == null
             || instance.cameraToggler == null
             || instance.pauseMenu == null
+            || instance.gameOverBox == null
         )
         {
             instance.inputToggler = GameObject
@@ -99,6 +103,8 @@ public class GameStateController : MonoBehaviour
                 .GetComponent<Toggler>();
             instance.pauseMenu = GameObject.Find("PauseMenuBox");
             instance.pauseMenu.SetActive(false);
+            instance.gameOverBox = GameObject.Find("GameOverBox");
+            instance.gameOverBox.SetActive(false);
             yield return null;
         }
     }
@@ -149,15 +155,53 @@ public class GameStateController : MonoBehaviour
         return Instantiate(entity, position, Quaternion.identity);
     }
 
+    private void TogglePauseGame()
+    {
+        isPaused = !isPaused;
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
+        }
+        // ToggleAllAudio();
+    }
+
+    public void TogglePauseMenu()
+    {
+        pauseMenu.SetActive(instance.isPaused);
+        TogglePauseGame();
+    }
+
     public void WinGame()
     {
-        Debug.Log("win game");
-        LoadScene(Scene.MainMenu);
+        StartCoroutine(GameOver("Win"));
     }
 
     public void LoseGame()
     {
-        Debug.Log("lose game");
+        StartCoroutine(GameOver("Lose"));
+    }
+
+    private IEnumerator GameOver(string condition)
+    {
+        var enums = Enum.GetValues(typeof(IsEnabled)).OfType<IsEnabled>().ToList();
+        enums.ForEach(e => Toggle(e, false));
+        gameOverBox.SetActive(true);
+        var conditions = gameOverBox.GetComponentsInChildren<Transform>();
+        foreach (var c in conditions)
+        {
+            if (!c.name.Contains(condition) && !c.gameObject.Equals(gameOverBox))
+            {
+                c.gameObject.SetActive(false);
+            }
+        }
+
+        yield return new WaitForSeconds(2);
         LoadScene(Scene.MainMenu);
     }
 
@@ -194,23 +238,6 @@ public class GameStateController : MonoBehaviour
     //     currentBossMusic = bossMusic;
     //     bossMusic.Play();
     // }
-
-    public void TogglePauseGame()
-    {
-        isPaused = !isPaused;
-        pauseMenu.SetActive(instance.isPaused);
-        if (isPaused)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            Time.timeScale = 1;
-        }
-        // ToggleAllAudio();
-    }
 
     // private void ToggleAllAudio()
     // {

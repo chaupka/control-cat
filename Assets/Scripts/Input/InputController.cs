@@ -51,7 +51,7 @@ public class InputController : MonoBehaviour
 
     private void OnPausePerformed(InputAction.CallbackContext context)
     {
-        GameStateController.instance.TogglePauseGame();
+        GameStateController.instance.TogglePauseMenu();
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context)

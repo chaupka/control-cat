@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.Equals(GameStateController.instance.cheese))
         {
+            Destroy(other.gameObject);
             GameStateController.instance.WinGame();
         }
     }
