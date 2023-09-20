@@ -38,13 +38,13 @@ namespace DungeonGeneration
             Random r
         )
         {
-            bool foundPositions = false;
             var dist = new Vector2Int(
                 r.Next(parameters.vent.minDistWidth, parameters.vent.maxDistWidth + 1),
                 r.Next(parameters.vent.minDistHeight, parameters.vent.maxDistHeight + 1)
             );
             var positions = ProceduralGenerationAlgorithms.GenerateBoundsWithDist(dist);
             Vector2Int startPosition = Vector2Int.zero;
+            bool foundPositions = false;
             while (!foundPositions)
             {
                 startPosition = parent.tilePositions.ElementAt(r.Next(parent.tilePositions.Count));
@@ -62,7 +62,7 @@ namespace DungeonGeneration
             };
             var platform = positions.Select(p => startPosition + p).ToHashSet();
             platform.ExceptWith(vent);
-            platform.RemoveWhere(p => vent.Any(v => p.x.Equals(v.x) && p.y > v.y));
+            platform.RemoveWhere(p => vent.Any(v => p.y > v.y));
 
             return new(vent, platform);
         }

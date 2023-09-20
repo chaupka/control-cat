@@ -16,8 +16,8 @@ MonoBehaviour:
     tree: {fileID: 11400000, guid: 9cda685678d5143b6997b557f0ba7d9d, type: 2}
     bounds:
       m_Position: {x: 0, y: 0, z: 0}
-      m_Size: {x: 700, y: 700, z: 0}
-    IsFilledWithTerrain: 0
+      m_Size: {x: 500, y: 500, z: 0}
+    IsFilledWithTerrain: 1
     filledOffset: 15
   room:
     isStartingRandomlyEachIteration: 0
