@@ -1053,8 +1053,8 @@ MonoBehaviour:
   description: 
   children: []
   bounds:
-    m_Position: {x: 270, y: 69, z: 0}
-    m_Size: {x: 79, y: 51, z: 0}
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
 --- !u!114 &-6736366456965673730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,8 +1092,8 @@ MonoBehaviour:
   children:
   - {fileID: 2816311739249692297}
   bounds:
-    m_Position: {x: 593, y: 74, z: 0}
-    m_Size: {x: 70, y: 53, z: 0}
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
   trap: 0
 --- !u!114 &-2666013677829564751
 MonoBehaviour:
@@ -1114,8 +1114,8 @@ MonoBehaviour:
   children:
   - {fileID: 2611130297417069680}
   bounds:
-    m_Position: {x: 542, y: 160, z: 0}
-    m_Size: {x: 58, y: 85, z: 0}
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
   key: 0
 --- !u!114 &-1763208346239242146
 MonoBehaviour:
@@ -1154,8 +1154,8 @@ MonoBehaviour:
   children:
   - {fileID: -8337217274629161520}
   bounds:
-    m_Position: {x: 349, y: 71, z: 0}
-    m_Size: {x: 78, y: 85, z: 0}
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
   keyLock: 0
 --- !u!114 &-604428100085427458
 MonoBehaviour:
@@ -2402,6 +2402,6 @@ MonoBehaviour:
   - {fileID: -1763208346239242146}
   - {fileID: -6736366456965673730}
   bounds:
-    m_Position: {x: 478, y: 160, z: 0}
-    m_Size: {x: 64, y: 85, z: 0}
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
   lore: 0

@@ -64,6 +64,7 @@ namespace DungeonGeneration
         public void Clear()
         {
             backgroundTilemap.ClearAllTiles();
+            backgroundPlaneTilemap.ClearAllTiles();
             terrainTilemap.ClearAllTiles();
         }
     }
