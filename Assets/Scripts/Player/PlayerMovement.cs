@@ -423,8 +423,11 @@ public class PlayerMovement : MonoBehaviour
         // check if any gameobject exists
 
         // check if is on specific position in tilemap
-        dungeonState.Interact(transform);
-        rb.velocity = Vector2.zero;
+        var hasInteracted = dungeonState.Interact(transform);
+        if (hasInteracted)
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     public void OnCopyPerformed()

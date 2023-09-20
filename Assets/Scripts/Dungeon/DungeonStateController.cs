@@ -60,7 +60,7 @@ namespace DungeonGeneration
             GameStateController.instance.Toggle(IsEnabled.INPUT, true);
         }
 
-        public void Interact(Transform transform)
+        public bool Interact(Transform transform)
         {
             var vents = dungeonGenerator.tree.nodes.OfType<VentNode>();
             var onParentVent = vents.FirstOrDefault(
@@ -73,12 +73,15 @@ namespace DungeonGeneration
             {
                 var destination = onParentVent.childVentPositions.ElementAt(0);
                 transform.position = new Vector2(destination.x, destination.y);
+                return true;
             }
             else if (onChildVent)
             {
                 var destination = onChildVent.parentVentPositions.ElementAt(0);
                 transform.position = new Vector2(destination.x, destination.y);
+                return true;
             }
+            return false;
         }
 
         public void CopyPlatform(Vector2Int position)

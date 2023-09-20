@@ -6,6 +6,6 @@ namespace Utility
 {
     public interface IInteract
     {
-        public void Interact(Transform transform);
+        public bool Interact(Transform transform);
     }
 }
