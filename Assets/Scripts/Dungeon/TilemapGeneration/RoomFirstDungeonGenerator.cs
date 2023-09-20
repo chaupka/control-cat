@@ -290,6 +290,10 @@ namespace DungeonGeneration
             tilemapVisualizer.PaintTerrainTiles(terrain);
             tilemapVisualizer.PaintVentTiles(vents);
             tilemapVisualizer.PaintBackTiles(background);
+            var backgroundPlane = new HashSet<Vector2Int>(terrain);
+            backgroundPlane.UnionWith(background);
+            backgroundPlane.UnionWith(vents);
+            tilemapVisualizer.PaintBackPlaneTiles(backgroundPlane);
         }
     }
 }

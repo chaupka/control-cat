@@ -8,11 +8,13 @@ namespace DungeonGeneration
     {
         [SerializeField]
         private Tilemap terrainTilemap,
-            backgroundTilemap;
+            backgroundTilemap,
+            backgroundPlaneTilemap;
 
         [SerializeField]
         private TileBase terrainTile,
             backgroundTile,
+            backgroundPlaneTile,
             ventTile;
 
         public void PaintTerrainTiles(IEnumerable<Vector2Int> terrainPositions)
@@ -38,6 +40,11 @@ namespace DungeonGeneration
         public void PaintVentTiles(IEnumerable<Vector2Int> ventPositions)
         {
             PaintTiles(ventPositions, backgroundTilemap, ventTile);
+        }
+
+        internal void PaintBackPlaneTiles(IEnumerable<Vector2Int> backgroundPlane)
+        {
+            PaintTiles(backgroundPlane, backgroundPlaneTilemap, backgroundPlaneTile);
         }
 
         private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
