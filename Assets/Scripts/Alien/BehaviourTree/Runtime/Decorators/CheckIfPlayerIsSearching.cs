@@ -12,9 +12,7 @@ public class CheckIfPlayerIsSearching : DecoratorNode
         blackboard.searchPosition = blackboard.moveToPosition;
     }
 
-    protected override void OnStop()
-    {
-    }
+    protected override void OnStop() { }
 
     protected override State OnUpdate()
     {
@@ -27,9 +25,8 @@ public class CheckIfPlayerIsSearching : DecoratorNode
             }
             return child.Update();
         }
-        context.renderer.color = Color.black;
+        context.bodyRenderer.color = Color.black;
         Abort();
         return State.Failure;
-
     }
 }

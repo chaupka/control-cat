@@ -12,7 +12,6 @@ namespace TheKiwiCoder
     {
         public GameObject alien;
         public Transform transform;
-        public SpriteRenderer renderer;
         public Animator animator;
         public Rigidbody physics;
         public NavMeshAgent agent;
@@ -22,12 +21,13 @@ namespace TheKiwiCoder
         public CapsuleCollider capsuleCollider;
         public Transform headTransform;
         public GameObject head;
+        public Transform bodyTransform;
+        public SpriteRenderer bodyRenderer;
 
         public static Context CreateFromGameObject(GameObject gameObject)
         {
             // Fetch all commonly used components
             Context context = new Context { alien = gameObject, transform = gameObject.transform };
-            context.renderer = context.transform.GetComponent<SpriteRenderer>();
             context.animator = gameObject.GetComponent<Animator>();
             context.physics = gameObject.GetComponent<Rigidbody>();
             context.agent = gameObject.GetComponent<NavMeshAgent>();
@@ -42,12 +42,21 @@ namespace TheKiwiCoder
             context.headTransform = GetHead(gameObject.transform);
             context.head = context.headTransform.gameObject;
 
+            // body
+            context.bodyTransform = GetBody(gameObject.transform);
+            context.bodyRenderer = context.bodyTransform.GetComponent<SpriteRenderer>();
+
             return context;
         }
 
         public static Transform GetHead(Transform transform)
         {
             return transform.Find("Head");
+        }
+
+        public static Transform GetBody(Transform transform)
+        {
+            return transform.Find("Body");
         }
     }
 }

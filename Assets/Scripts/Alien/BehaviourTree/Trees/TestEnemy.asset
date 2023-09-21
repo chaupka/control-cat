@@ -55,8 +55,8 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   child: {fileID: 5285492675707118391}
-  viewRadius: 10
-  viewAngle: 80
+  viewRadius: 15
+  viewAngle: 130
 --- !u!114 &-5660333016957678146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +430,7 @@ MonoBehaviour:
   drawGizmos: 0
   tolerance: 0.05
   rotationSmoothing: 3
-  maxDistHead: 0.8
+  maxDistHead: 0.7
 --- !u!114 &5285492675707118391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,10 +456,10 @@ MonoBehaviour:
     searchPosition: {x: 0, y: 0}
   description: 
   drawGizmos: 0
-  speed: 10
-  stoppingDistance: 2
+  speed: 20
+  stoppingDistance: 1
   acceleration: 10
-  tolerance: 1
+  tolerance: 2
 --- !u!114 &5722611894617935046
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class CheckIfPlayerIsInFov : DecoratorNode
                     blackboard.moveToPosition = playerPosition;
                     blackboard.isAgitated = true;
                     blackboard.isChasing = true;
-                    context.renderer.color = Color.red;
+                    context.bodyRenderer.color = Color.red;
 
                     // TODO _animator.SetBool("Walking", true);
                     return child.Update();

@@ -8,13 +8,9 @@ public class MoveToHeadRotation : ActionNode
     public float rotationSmoothing = 0.1f;
     public float maxDistHead = 2.0f;
 
-    protected override void OnStart()
-    {
-    }
+    protected override void OnStart() { }
 
-    protected override void OnStop()
-    {
-    }
+    protected override void OnStop() { }
 
     protected override State OnUpdate()
     {
@@ -34,13 +30,28 @@ public class MoveToHeadRotation : ActionNode
         {
             lookRotation *= Quaternion.Euler(Vector3.forward * blackboard.moveToHeadAngle);
         }
-        context.headTransform.rotation = Quaternion.Lerp(context.headTransform.rotation, lookRotation, rotationSmoothing * Time.deltaTime);
-        context.headTransform.localPosition = context.headTransform.rotation * Vector3.up * Mathf.Min(
-            (Mathf.Cos(
-                context.agent.velocity.magnitude * Mathf.PI / context.agent.speed + Mathf.PI
-                ) + 1) * 0.5f * maxDistHead, maxDistHead
+        context.headTransform.rotation = Quaternion.Lerp(
+            context.headTransform.rotation,
+            lookRotation,
+            rotationSmoothing * Time.deltaTime
+        );
+        context.headTransform.localPosition =
+            context.headTransform.rotation
+            * Vector3.up
+            * Mathf.Min(
+                (
+                    Mathf.Cos(
+                        context.agent.velocity.magnitude * Mathf.PI / context.agent.speed + Mathf.PI
+                    ) + 1
+                )
+                    * 0.5f
+                    * maxDistHead,
+                maxDistHead
             );
-        if (Mathf.Abs(lookRotation.z - context.headTransform.rotation.z) < tolerance)
+        if (
+            Mathf.Abs(lookRotation.eulerAngles.z - context.headTransform.rotation.eulerAngles.z)
+            < tolerance
+        )
         {
             return State.Success;
         }
