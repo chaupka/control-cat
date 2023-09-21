@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         {
             ClipCorner();
         }
-        GameStateController.instance.cameraController.OffsetCamera(false);
+        GameStateController.singleton.cameraController.OffsetCamera(false);
         return false;
     }
 
@@ -392,6 +392,10 @@ public class PlayerMovement : MonoBehaviour
             CoyoteJump();
         }
         canJump = IsGrounded && canJump;
+        if (canJump)
+        {
+            GameStateController.singleton.audioState.PlaySound(Sound.Jump);
+        }
     }
 
     public void OnJumpCancelled()
@@ -415,14 +419,14 @@ public class PlayerMovement : MonoBehaviour
             && Mathf.Abs(rb.velocity.y) < 0.01f
         )
         {
-            GameStateController.instance.cameraController.OffsetCamera(true, lookingUp);
+            GameStateController.singleton.cameraController.OffsetCamera(true, lookingUp);
         }
     }
 
     public void OnLookingUpOrDownCancelled()
     {
         lookingUp = 0;
-        GameStateController.instance.cameraController.OffsetCamera(false);
+        GameStateController.singleton.cameraController.OffsetCamera(false);
         // reset look animation bool
     }
 
@@ -430,6 +434,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canDash)
         {
+            GameStateController.singleton.audioState.PlaySound(Sound.Dash);
             StartCoroutine(Dash());
         }
     }

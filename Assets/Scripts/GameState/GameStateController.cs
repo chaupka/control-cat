@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using Utility;
 using Scene = Utility.Scene;
@@ -16,12 +15,10 @@ public enum IsEnabled
 
 public class GameStateController : MonoBehaviour
 {
-    public static GameStateController instance;
+    public static GameStateController singleton;
 
     public GameObject playerPrefab;
-    public GameObject player;
     public GameObject alienPrefab;
-    public GameObject alien;
     public GameObject cheesePrefab;
     public GameObject cheese;
     public HashSet<IsEnabled> isEnabled;
@@ -30,81 +27,90 @@ public class GameStateController : MonoBehaviour
     public CameraController cameraController;
     public Toggler cameraToggler;
 
-    // public List<string> hasMetTheseFriends;
-    // public List<string> hasMetTheseBosses;
-    // public GameObject ammo;
-    // public GameObject startAmmo;
-    // public int sanity;
-    // public int startSanity;
-    // public int deathThreshold;
-    // public int hasDiedInTheLab;
-    // public int hasDiedInMensa;
-    // public int hasDiedInTheOffice;
-    // public int hasDiedInTheEnd;
     public bool isPaused;
     GameObject pauseMenu;
     GameObject gameOverBox;
-
-    // public AudioSource currentDungeonMusic;
-    // public AudioSource currentBossMusic;
+    public AudioController audioState;
+    public AIDirectorController aiDirector;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     static void Init()
     {
-        instance = null;
+        singleton = null;
     }
 
     void Awake()
     {
         isEnabled = new HashSet<IsEnabled>();
-        if (instance == null)
+        if (singleton == null)
         {
             DontDestroyOnLoad(this.gameObject);
-            instance = this;
+            singleton = this;
+            SetupScene();
         }
-        else if (instance != this)
+        else if (singleton != this)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public static void OnLoadScene(Scene scene)
+    {
+        singleton.StartCoroutine(LoadScene(scene));
+    }
+
+    private static IEnumerator LoadScene(Scene scene)
+    {
+        var asyncLoadLevel = SceneManager.LoadSceneAsync(scene.ToString());
+        while (!asyncLoadLevel.isDone)
+        {
+            yield return null;
+        }
+        singleton.SetupScene();
+    }
+
+    private void SetupScene()
+    {
         var activeScene = SceneManager.GetActiveScene();
         switch (activeScene.name)
         {
             case nameof(Scene.MainMenu):
-                break;
+                goto default;
             case nameof(Scene.GamePlay):
+                aiDirector = GetComponentInChildren<AIDirectorController>();
+                aiDirector.Initialize();
                 StartCoroutine(StartGamePlay());
+                goto default;
+            default:
+                audioState = GetComponentInChildren<AudioController>();
+                StartCoroutine(audioState.InitializeAudio());
                 break;
         }
     }
 
-    public void LoadScene(Scene scene)
-    {
-        SceneManager.LoadScene(scene.ToString());
-    }
-
-    private IEnumerator StartGamePlay()
+    private static IEnumerator StartGamePlay()
     {
         while (
-            instance.inputToggler == null
-            || instance.cameraController == null
-            || instance.cameraToggler == null
-            || instance.pauseMenu == null
-            || instance.gameOverBox == null
+            singleton.inputToggler == null
+            || singleton.cameraController == null
+            || singleton.cameraToggler == null
+            || singleton.pauseMenu == null
+            || singleton.gameOverBox == null
         )
         {
-            instance.inputToggler = GameObject
+            singleton.inputToggler = GameObject
                 .Find("InputControllerToggler")
                 .GetComponent<Toggler>();
-            instance.cameraController = GameObject
+            singleton.cameraController = GameObject
                 .Find("Cinemachine")
                 .GetComponent<CameraController>();
-            instance.cameraToggler = GameObject
+            singleton.cameraToggler = GameObject
                 .Find("CameraControllerToggler")
                 .GetComponent<Toggler>();
-            instance.pauseMenu = GameObject.Find("PauseMenuBox");
-            instance.pauseMenu.SetActive(false);
-            instance.gameOverBox = GameObject.Find("GameOverBox");
-            instance.gameOverBox.SetActive(false);
+            singleton.pauseMenu = GameObject.Find("PauseMenuBox");
+            singleton.pauseMenu.SetActive(false);
+            singleton.gameOverBox = GameObject.Find("GameOverBox");
+            singleton.gameOverBox.SetActive(false);
             yield return null;
         }
     }
@@ -137,12 +143,12 @@ public class GameStateController : MonoBehaviour
 
     public void SpawnPlayer(Vector2 position)
     {
-        player = Spawn(playerPrefab, position);
+        aiDirector.player = Spawn(playerPrefab, position);
     }
 
     public void SpawnAlien(Vector2 position)
     {
-        alien = Spawn(alienPrefab, position);
+        aiDirector.aliens.Add(Spawn(alienPrefab, position));
     }
 
     public void SpawnCheese(Vector2 position)
@@ -168,27 +174,30 @@ public class GameStateController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1;
         }
-        // ToggleAllAudio();
+        audioState.ToggleMusic(isPaused);
     }
 
     public void TogglePauseMenu()
     {
-        pauseMenu.SetActive(instance.isPaused);
         TogglePauseGame();
+        pauseMenu.SetActive(singleton.isPaused);
     }
 
     public void WinGame()
     {
+        audioState.PlaySound(Sound.Win);
         StartCoroutine(GameOver("Win"));
     }
 
     public void LoseGame()
     {
+        audioState.PlaySound(Sound.Lose);
         StartCoroutine(GameOver("Lose"));
     }
 
     private IEnumerator GameOver(string condition)
     {
+        audioState.ToggleMusic(true);
         var enums = Enum.GetValues(typeof(IsEnabled)).OfType<IsEnabled>().ToList();
         enums.ForEach(e => Toggle(e, false));
         gameOverBox.SetActive(true);
@@ -201,55 +210,7 @@ public class GameStateController : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(2);
-        LoadScene(Scene.MainMenu);
+        yield return new WaitForSeconds(5);
+        OnLoadScene(Scene.MainMenu);
     }
-
-    // private void Start()
-    // {
-    //     currentBossMusic = new AudioSource();
-    // }
-
-    // public void StartDungeonMusicInMostDungeons()
-    // {
-    //     if (SceneManager.GetActiveScene().name != "EndDungeon")
-    //     {
-    //         StartDungeonMusic();
-    //     }
-    // }
-
-    // public void StartDungeonMusic()
-    // {
-    //     if (!currentDungeonMusic)
-    //     {
-    //         currentDungeonMusic = GameObject.Find("DungeonMusic").GetComponent<AudioSource>();
-    //         currentDungeonMusic.Play();
-    //     }
-    // }
-
-    // public void StopDungeonMusic()
-    // {
-    //     if (currentDungeonMusic) currentDungeonMusic.Pause();
-    //     currentDungeonMusic = null;
-    // }
-
-    // public void StartBossMusic(AudioSource bossMusic)
-    // {
-    //     currentBossMusic = bossMusic;
-    //     bossMusic.Play();
-    // }
-
-    // private void ToggleAllAudio()
-    // {
-    //     if (isPaused)
-    //     {
-    //         if (currentDungeonMusic) currentDungeonMusic.Pause();
-    //         if (currentBossMusic) currentBossMusic.Pause();
-    //     }
-    //     else
-    //     {
-    //         if (currentDungeonMusic) currentDungeonMusic.Play();
-    //         if (currentBossMusic) currentBossMusic.Play();
-    //     }
-    // }
 }

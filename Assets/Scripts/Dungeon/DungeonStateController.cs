@@ -17,7 +17,6 @@ namespace DungeonGeneration
         public Queue<HashSet<Vector2Int>> platforms = new();
         public int maxPlatforms;
         public int platformCounter;
-        public int catCounter;
 
         // Start is called before the first frame update
         void Start()
@@ -41,7 +40,7 @@ namespace DungeonGeneration
                 endRoom.size.magnitude,
                 NavMesh.AllAreas
             );
-            GameStateController.instance.SpawnCheese(cheeseHit.position);
+            GameStateController.singleton.SpawnCheese(cheeseHit.position);
             var startRoom = rooms.FirstOrDefault(r => r is StartRoom).bounds;
 
             NavMesh.SamplePosition(
@@ -50,14 +49,14 @@ namespace DungeonGeneration
                 startRoom.size.magnitude,
                 NavMesh.AllAreas
             );
-            GameStateController.instance.SpawnPlayer(playerHit.position);
-            GameStateController.instance.Toggle(IsEnabled.CAMERA, true);
+            GameStateController.singleton.SpawnPlayer(playerHit.position);
+            GameStateController.singleton.Toggle(IsEnabled.CAMERA, true);
             StartCoroutine(
-                GameStateController.instance.cameraController.InitializeConfiner(
+                GameStateController.singleton.cameraController.InitializeConfiner(
                     dungeonGenerator.parameters.dungeon.bounds
                 )
             );
-            GameStateController.instance.Toggle(IsEnabled.INPUT, true);
+            GameStateController.singleton.Toggle(IsEnabled.INPUT, true);
         }
 
         public bool Interact(Transform transform)
@@ -112,7 +111,7 @@ namespace DungeonGeneration
         private IEnumerator CopyCat()
         {
             yield return new WaitUntil(() => navMeshController.isDone);
-            catCounter += 1;
+            GameStateController.singleton.audioState.PlaySound(Sound.CatSpawn);
             var potSpawnRooms = rooms.Where(r => !r.Equals(playerRoom)).ToHashSet();
             var alienSpawnRoom = potSpawnRooms
                 .ElementAt(Random.Range(0, potSpawnRooms.Count))
@@ -123,7 +122,7 @@ namespace DungeonGeneration
                 alienSpawnRoom.size.magnitude,
                 NavMesh.AllAreas
             );
-            GameStateController.instance.SpawnAlien(alienHit.position);
+            GameStateController.singleton.SpawnAlien(alienHit.position);
         }
     }
 }

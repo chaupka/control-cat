@@ -36,6 +36,7 @@ public class MenuController
     public void OnPointerDown(PointerEventData eventData)
     {
         HandleClick();
+        GameStateController.singleton.audioState.PlaySound(Sound.ButtonPress);
     }
 
     protected virtual void HandleClick()

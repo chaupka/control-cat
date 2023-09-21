@@ -44,10 +44,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.Equals(GameStateController.instance.cheese))
+        if (other.gameObject.Equals(GameStateController.singleton.cheese))
         {
             Destroy(other.gameObject);
-            GameStateController.instance.WinGame();
+            GameStateController.singleton.WinGame();
         }
     }
 }

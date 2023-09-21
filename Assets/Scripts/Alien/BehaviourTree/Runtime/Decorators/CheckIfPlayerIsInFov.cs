@@ -22,7 +22,7 @@ public class CheckIfPlayerIsInFov : DecoratorNode
         );
         if (collider != null)
         {
-            var playerPosition = GameStateController.instance.player.transform.position;
+            var playerPosition = GameStateController.singleton.aiDirector.player.transform.position;
             var dirToPlayer = (playerPosition - context.head.transform.position).normalized;
             if (Vector2.Angle(context.headTransform.up, dirToPlayer) < (viewAngle / 2))
             {

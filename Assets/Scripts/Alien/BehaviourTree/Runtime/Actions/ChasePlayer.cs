@@ -27,7 +27,7 @@ public class ChasePlayer : ActionNode
 
         if (blackboard.isChasing && context.agent.remainingDistance < tolerance)
         {
-            GameStateController.instance.LoseGame();
+            GameStateController.singleton.LoseGame();
             return State.Success;
         }
 

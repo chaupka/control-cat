@@ -14,7 +14,7 @@ public class MainMenu : MenuController
         base.HandleClick();
         if (isPlay)
         {
-            GameStateController.instance.LoadScene(Scene.GamePlay);
+            GameStateController.OnLoadScene(Scene.GamePlay);
         }
         else if (isQuit)
         {
