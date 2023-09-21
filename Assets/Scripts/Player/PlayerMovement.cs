@@ -108,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 leftHeadBumpEdge;
     Vector2 rightHeadBumpEdge;
     private DungeonStateController dungeonState;
+    private Animator animator;
 
     [SerializeField]
     PlatformingExtras platforming;
@@ -190,6 +191,7 @@ public class PlayerMovement : MonoBehaviour
         contactFilter2D.useLayerMask = true;
         dungeonState = GameObject.Find("DungeonState").GetComponent<DungeonStateController>();
         StartCoroutine(CheckIsInRoom());
+        animator = GetComponentInChildren<Animator>();
     }
 
     private IEnumerator CheckIsInRoom()
@@ -364,6 +366,20 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region events
+
+    public void OnMovePerformed(float movingRight)
+    {
+        this.movingRight = movingRight;
+        animator.SetBool("isWalking", true);
+        animator.SetFloat("walk_right", movingRight);
+    }
+
+    public void OnMoveCancelled()
+    {
+        movingRight = 0;
+        animator.SetBool("isWalking", false);
+    }
+
     public void OnJumpPerformed()
     {
         isPressingJump = true;

@@ -72,13 +72,13 @@ namespace DungeonGeneration
             if (onParentVent)
             {
                 var destination = onParentVent.childVentPositions.ElementAt(0);
-                transform.position = new Vector2(destination.x, destination.y);
+                transform.position = new Vector2(destination.x, destination.y + 1);
                 return true;
             }
             else if (onChildVent)
             {
                 var destination = onChildVent.parentVentPositions.ElementAt(0);
-                transform.position = new Vector2(destination.x, destination.y);
+                transform.position = new Vector2(destination.x, destination.y + 1);
                 return true;
             }
             return false;

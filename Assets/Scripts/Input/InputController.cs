@@ -56,12 +56,12 @@ public class InputController : MonoBehaviour
 
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
-        playerMovement.movingRight = context.ReadValue<Vector2>().x;
+        playerMovement.OnMovePerformed(context.ReadValue<Vector2>().x);
     }
 
     private void OnMoveCancelled(InputAction.CallbackContext context)
     {
-        playerMovement.movingRight = 0;
+        playerMovement.OnMoveCancelled();
     }
 
     private void OnLookPerformed(InputAction.CallbackContext context)
