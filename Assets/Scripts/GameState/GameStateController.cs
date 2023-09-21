@@ -197,6 +197,7 @@ public class GameStateController : MonoBehaviour
 
     private IEnumerator GameOver(string condition)
     {
+        aiDirector.Disable();
         audioState.ToggleMusic(true);
         var enums = Enum.GetValues(typeof(IsEnabled)).OfType<IsEnabled>().ToList();
         enums.ForEach(e => Toggle(e, false));

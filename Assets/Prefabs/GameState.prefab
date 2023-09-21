@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  alien: {fileID: 0}
-  hearAlienDistance: 20
+  aliens: []
+  hearAlienDistance: 25
 --- !u!1 &6628079640601740089
 GameObject:
   m_ObjectHideFlags: 0

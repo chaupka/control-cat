@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor;
 using UnityEngine;
 
 public class AIDirectorController : MonoBehaviour
 {
     public GameObject player;
-    public List<GameObject> aliens = new();
+    public List<GameObject> aliens;
 
     [SerializeField]
     private float hearAlienDistance;
     private bool isCloseToAlien;
+    Coroutine trackAliens;
 
     public void Initialize()
     {
-        StartCoroutine(CheckDistanceToAliens());
+        aliens = new();
+        trackAliens = StartCoroutine(CheckDistanceToAliens());
     }
 
     private IEnumerator CheckDistanceToAliens()
@@ -39,5 +39,10 @@ public class AIDirectorController : MonoBehaviour
                 GameStateController.singleton.audioState.StopSound(Sound.CatClose);
             }
         }
+    }
+
+    public void Disable()
+    {
+        StopCoroutine(trackAliens);
     }
 }
