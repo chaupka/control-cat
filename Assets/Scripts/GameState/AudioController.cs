@@ -10,6 +10,7 @@ public enum Sound
     Jump,
     Dash,
     ButtonPress,
+    PlatformSpawn,
     CatSpawn,
     CatClose
 }

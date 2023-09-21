@@ -105,6 +105,10 @@ namespace DungeonGeneration
             {
                 StartCoroutine(CopyCat());
             }
+            else
+            {
+                GameStateController.singleton.audioState.PlaySound(Sound.PlatformSpawn);
+            }
             navMeshController.Rebake();
         }
 

@@ -17,7 +17,7 @@ MonoBehaviour:
     bounds:
       m_Position: {x: 0, y: 0, z: 0}
       m_Size: {x: 500, y: 500, z: 0}
-    IsFilledWithTerrain: 0
+    IsFilledWithTerrain: 1
     filledOffset: 15
   room:
     isStartingRandomlyEachIteration: 0

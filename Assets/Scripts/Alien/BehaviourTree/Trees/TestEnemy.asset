@@ -459,7 +459,7 @@ MonoBehaviour:
   speed: 20
   stoppingDistance: 1
   acceleration: 10
-  tolerance: 2
+  tolerance: 1.5
 --- !u!114 &5722611894617935046
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -251,7 +251,7 @@ MonoBehaviour:
   walkFriction: 0.2
   lookingUp: 0
   isPressingJump: 0
-  jumpForce: 17
+  jumpForce: 15
   maxJumpTime: 0.15
   headBumpRay: 0.2
   dashTime: 0.2
