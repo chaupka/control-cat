@@ -51,11 +51,11 @@ namespace DungeonGeneration
             );
             GameStateController.singleton.SpawnPlayer(playerHit.position);
             GameStateController.singleton.Toggle(IsEnabled.CAMERA, true);
-            StartCoroutine(
-                GameStateController.singleton.cameraController.InitializeConfiner(
-                    dungeonGenerator.parameters.dungeon.bounds
-                )
-            );
+            // StartCoroutine(
+            //     GameStateController.singleton.cameraController.InitializeConfiner(
+            //         dungeonGenerator.parameters.dungeon.bounds
+            //     )
+            // );
             GameStateController.singleton.Toggle(IsEnabled.INPUT, true);
         }
 

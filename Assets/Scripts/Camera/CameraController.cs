@@ -47,19 +47,19 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public IEnumerator InitializeConfiner(BoundsInt dungeonBounds)
-    {
-        yield return new WaitUntil(() => vcam != null);
-        var confiner = vcam.GetComponent<CinemachineConfiner2D>();
-        confiner.InvalidateCache();
-        var collider = (PolygonCollider2D)confiner.m_BoundingShape2D;
-        var dungeonCorners = new Vector2[]
-        {
-            new Vector2Int(dungeonBounds.min.x, dungeonBounds.min.y),
-            new Vector2Int(dungeonBounds.min.x, dungeonBounds.max.y),
-            new Vector2Int(dungeonBounds.max.x, dungeonBounds.max.y),
-            new Vector2Int(dungeonBounds.max.x, dungeonBounds.min.y)
-        };
-        collider.points = dungeonCorners;
-    }
+    // public IEnumerator InitializeConfiner(BoundsInt dungeonBounds)
+    // {
+    //     yield return new WaitUntil(() => vcam != null);
+    //     var confiner = vcam.GetComponent<CinemachineConfiner2D>();
+    //     confiner.InvalidateCache();
+    //     var collider = (PolygonCollider2D)confiner.m_BoundingShape2D;
+    //     var dungeonCorners = new Vector2[]
+    //     {
+    //         new Vector2Int(dungeonBounds.min.x, dungeonBounds.min.y),
+    //         new Vector2Int(dungeonBounds.min.x, dungeonBounds.max.y),
+    //         new Vector2Int(dungeonBounds.max.x, dungeonBounds.max.y),
+    //         new Vector2Int(dungeonBounds.max.x, dungeonBounds.min.y)
+    //     };
+    //     collider.points = dungeonCorners;
+    // }
 }

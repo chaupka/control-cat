@@ -21,6 +21,7 @@ public class PauseMenu : MenuController
 
     private void QuitToMainMenu()
     {
+        GameStateController.singleton.DisableScene();
         GameStateController.OnLoadScene(Scene.MainMenu);
     }
 }

@@ -44,5 +44,7 @@ public class AIDirectorController : MonoBehaviour
     public void Disable()
     {
         StopCoroutine(trackAliens);
+        player = null;
+        aliens.Clear();
     }
 }

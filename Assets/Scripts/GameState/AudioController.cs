@@ -20,7 +20,12 @@ public class AudioController : MonoBehaviour
     public AudioSource currentMusic;
     private List<AudioSource> sounds;
 
-    public IEnumerator InitializeAudio()
+    public void Initialize()
+    {
+        StartCoroutine(InitializeAudio());
+    }
+
+    private IEnumerator InitializeAudio()
     {
         while (!currentMusic)
         {
@@ -38,17 +43,17 @@ public class AudioController : MonoBehaviour
         currentMusic = null;
     }
 
-    public void ToggleMusic(bool isPaused)
+    public void ToggleMusic(bool isEnabled)
     {
         if (currentMusic)
         {
-            if (isPaused)
+            if (isEnabled)
             {
-                currentMusic.Pause();
+                currentMusic.Play();
             }
             else
             {
-                currentMusic.Play();
+                currentMusic.Pause();
             }
         }
     }
@@ -68,5 +73,11 @@ public class AudioController : MonoBehaviour
     private AudioSource FindSound(Sound soundCondition)
     {
         return sounds.FirstOrDefault(s => s.gameObject.name.Equals(soundCondition.ToString()));
+    }
+
+    public void Disable()
+    {
+        currentMusic = null;
+        sounds.Clear();
     }
 }

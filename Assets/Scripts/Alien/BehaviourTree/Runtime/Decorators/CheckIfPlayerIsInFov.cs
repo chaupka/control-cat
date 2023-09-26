@@ -20,7 +20,7 @@ public class CheckIfPlayerIsInFov : DecoratorNode
             viewRadius,
             LayerTag.playerLayer
         );
-        if (collider != null)
+        if (collider != null && GameStateController.singleton.aiDirector.player)
         {
             var playerPosition = GameStateController.singleton.aiDirector.player.transform.position;
             var dirToPlayer = (playerPosition - context.head.transform.position).normalized;

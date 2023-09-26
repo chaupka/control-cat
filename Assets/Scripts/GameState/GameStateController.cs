@@ -83,7 +83,7 @@ public class GameStateController : MonoBehaviour
                 goto default;
             default:
                 audioState = GetComponentInChildren<AudioController>();
-                StartCoroutine(audioState.InitializeAudio());
+                audioState.Initialize();
                 break;
         }
     }
@@ -174,7 +174,7 @@ public class GameStateController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1;
         }
-        audioState.ToggleMusic(isPaused);
+        audioState.ToggleMusic(!isPaused);
     }
 
     public void TogglePauseMenu()
@@ -195,12 +195,18 @@ public class GameStateController : MonoBehaviour
         StartCoroutine(GameOver("Lose"));
     }
 
-    private IEnumerator GameOver(string condition)
+    public void DisableScene()
     {
         aiDirector.Disable();
-        audioState.ToggleMusic(true);
+        audioState.ToggleMusic(false);
+        audioState.Disable();
         var enums = Enum.GetValues(typeof(IsEnabled)).OfType<IsEnabled>().ToList();
         enums.ForEach(e => Toggle(e, false));
+    }
+
+    private IEnumerator GameOver(string condition)
+    {
+        DisableScene();
         gameOverBox.SetActive(true);
         var conditions = gameOverBox.GetComponentsInChildren<Transform>();
         foreach (var c in conditions)
